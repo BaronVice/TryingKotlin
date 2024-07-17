@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Practice</string>
+    <string name="click_me">Click me</string>
+    <string name="clown_phrase">Clown 🤡 app</string>
+    <string name="clown_name">🤡 name</string>
+    <string name="clown_mask">🤡</string>
+</resources>
