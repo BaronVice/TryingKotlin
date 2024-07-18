@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Практика</string>
+    <string name="click_me">Жмякай</string>
+    <string name="clown_phrase">Ты клоун 🤡</string>
+    <string name="clown_name">🤡 имя клоуна</string>
+    <string name="clown_mask">🤡</string>
+    <string name="dancing_clown">Оу вау, это же танцующий клоун!</string>
+    <string name="ded_clown">Панк и клоун в одном теле, мдэ…</string>
+    <string name="dev_clown">Леди и клоуны, Девоп(е)с клоун!</string>
+    <string name="not_clown">Здесь осел, но без клоунов…</string>
+</resources>
