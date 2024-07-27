@@ -4,8 +4,10 @@
     <string name="clown_phrase">Clown 🤡 app</string>
     <string name="clown_name">🤡 name</string>
     <string name="clown_mask">🤡</string>
-    <string name="dancing_clown">Oh hey, it\'s a dancing clown!</string>
+    <string name="dancing_clown">Oh hey, it`s a dancing clown!</string>
     <string name="ded_clown">Both punk and clown, bruh…</string>
     <string name="dev_clown">Ladies and clowns, the Dev Clown himself!</string>
     <string name="not_clown">No clowns here…</string>
+    <string name="donkey_is_dead">Congratulations! You`ve killed a donkey!</string>
+    <string name="nothing">No clowns… no donkeys…</string>
 </resources>

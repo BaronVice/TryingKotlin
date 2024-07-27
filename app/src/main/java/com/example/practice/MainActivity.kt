@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,12 +15,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.marginBottom
 import androidx.core.view.updateLayoutParams
 import com.example.practice.databinding.ActivityMainBinding
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
     private val tag = "MainActivityLog"
+    private val donkeyTap = AtomicInteger(1)
 
     private lateinit var handler: Handler
     private lateinit var taskToRun: Runnable
@@ -39,28 +42,49 @@ class MainActivity : AppCompatActivity() {
 
         setClownMaskTvOnClick()
         handler = Handler(Looper.myLooper()!!)
-        taskToRun = Runnable {
-            if (mainBinding.donkeyIv.visibility == View.VISIBLE){
-                mainBinding.donkeyIv.visibility = View.INVISIBLE
-            } else {
-                mainBinding.donkeyIv.updateLayoutParams<MarginLayoutParams> {
-                    setMargins( 0, 0, 0, Random.nextInt(
-                        // todo: help, refactor
-                        0, resources.displayMetrics.run { heightPixels / density }.toInt()-200
-                    ))
-                }
-                mainBinding.donkeyIv.visibility = View.VISIBLE
-            }
-
-            val t = Random.nextLong(100, 5000)
-            Log.d(tag, "Generated time: $t")
-
-            val res = handler.postDelayed(taskToRun, t)
-            Log.d(tag, "Runnable task ${if (res) "successfully executed" else "failed to execute"}")
-        }
+        taskToRun = Runnable { fancyDonkeys() }
         startRepeatingTasks()
 
         Log.d(tag, "MainActivity is created")
+    }
+
+    private fun fancyDonkeys() {
+        val left = mainBinding.donkeyIvReverse
+        val right = mainBinding.donkeyIv
+
+        if (left.visibility == View.VISIBLE || right.visibility == View.VISIBLE){
+            donkeyAway()
+        } else {
+            val toShow = if (Random.nextBoolean()) left else right
+            toShow.updateLayoutParams<MarginLayoutParams> {
+                setMargins( 0, 0, 0, Random.nextInt(
+                    // todo: help, refactor
+                    0, resources.displayMetrics.run { heightPixels / density }.toInt()
+                ))
+            }
+            toShow.visibility = View.VISIBLE
+        }
+
+        val t = Random.nextLong(100, 5000)
+        Log.d(tag, "Generated time: $t")
+
+        val res = handler.postDelayed(taskToRun, t)
+        Log.d(tag, "Runnable task ${if (res) "successfully executed" else "failed to execute"}")
+    }
+
+    private fun donkeyAway() {
+        mainBinding.donkeyIv.visibility = View.GONE
+        mainBinding.donkeyIvReverse.visibility = View.GONE
+    }
+
+    fun donkeyOnTap(v: View){
+        v.visibility = View.INVISIBLE
+        if(donkeyTap.incrementAndGet() > 10){
+            stopRepeatingTask()
+            donkeyAway()
+            mainBinding.resultTv.text = getString(R.string.donkey_is_dead)
+            mainBinding.resultTv.visibility = View.VISIBLE
+        }
     }
 
     private fun startRepeatingTasks() {
@@ -77,7 +101,7 @@ class MainActivity : AppCompatActivity() {
                 Names.DANCER -> R.string.dancing_clown
                 Names.DED -> R.string.ded_clown
                 Names.SUGAR -> R.string.dev_clown
-                else -> R.string.not_clown
+                else -> { if (donkeyTap.get() >= 10) R.string.nothing else R.string.not_clown }
             }
 
             Log.d(tag, "namePt input: ${input.ifEmpty { "-NO INPUT FROM USER-" }}; textToSet: ${getString(textToSetId)}")

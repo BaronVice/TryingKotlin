@@ -11,7 +11,7 @@
         android:id="@+id/clownTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="32sp"
         android:text="@string/clown_phrase"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         android:id="@+id/namePt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="32sp"
         android:ems="10"
         android:hint="@string/clown_name"
         android:inputType="text|textPersonName"
@@ -36,13 +36,13 @@
         android:id="@+id/resultTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
+        android:layout_marginHorizontal="32sp"
+        android:layout_marginTop="32sp"
         android:textAlignment="center"
         android:textSize="28sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/namePt"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="@+id/namePt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/namePt" />
 
     <TextView
@@ -51,15 +51,15 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="@string/clown_mask"
-        android:textSize="128sp"
+        android:textSize="64sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/donkeyIv"
-        android:layout_width="44dp"
-        android:layout_height="149dp"
+        android:layout_width="64sp"
+        android:layout_height="149sp"
         android:layout_marginBottom="100sp"
         android:onClick="donkeyOnTap"
         android:visibility="gone"
@@ -69,9 +69,9 @@
 
     <ImageView
         android:id="@+id/donkeyIvReverse"
-        android:layout_width="44dp"
-        android:layout_height="149dp"
-        android:layout_marginBottom="100dp"
+        android:layout_width="64sp"
+        android:layout_height="149sp"
+        android:layout_marginBottom="100sp"
         android:onClick="donkeyOnTap"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

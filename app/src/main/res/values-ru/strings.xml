@@ -8,4 +8,6 @@
     <string name="ded_clown">Панк и клоун в одном теле, мдэ…</string>
     <string name="dev_clown">Леди и клоуны, Девоп(е)с клоун!</string>
     <string name="not_clown">Здесь осел, но без клоунов…</string>
+    <string name="donkey_is_dead">Ты затыкал осла, он больше не вернется…</string>
+    <string name="nothing">Нет осла - нет клоунов</string>
 </resources>
