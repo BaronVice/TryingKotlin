@@ -10,4 +10,10 @@
     <string name="not_clown">Здесь осел, но без клоунов…</string>
     <string name="donkey_is_dead">Ты затыкал осла, он больше не вернется…</string>
     <string name="nothing">Нет осла - нет клоунов</string>
+    <string name="transition">Щас все будет…</string>
+
+    <string name="deadDonkeyMessage">Воскресить ослика?</string>
+    <string name="nothingToSee">Здесь ничего нет…</string>
+    <string name="yes">Да!</string>
+    <string name="sadFace">&#128535;</string>
 </resources>

@@ -10,4 +10,11 @@
     <string name="not_clown">No clowns here…</string>
     <string name="donkey_is_dead">Congratulations! You`ve killed a donkey!</string>
     <string name="nothing">No clowns… no donkeys…</string>
+    <string name="transition">Hold it!</string>
+
+    <string name="deadDonkeyMessage">Resurrect donkey?</string>
+    <string name="nothingToSee">Nothing to see here…</string>
+    <string name="yes">Yes</string>
+    <string name="sadFace">&#128531;</string>
+    <string name="happyFace" translatable="false">&#128516;</string>
 </resources>

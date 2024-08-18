@@ -1,5 +1,6 @@
 package com.example.practice
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,6 +10,8 @@ import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -21,6 +24,7 @@ import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private val tag = "MainActivityLog"
     private val donkeyTap = AtomicInteger(1)
 
@@ -30,14 +34,29 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
+
+        enableEdgeToEdge()
         setContentView(mainBinding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        resultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){ result ->
+            Log.d(tag, result.resultCode.toString())
+            if (result.resultCode == RESULT_OK){
+                val d: Intent? = result.data
+                val isResurrected = d?.getBooleanExtra("resurrect", false)
+                if (isResurrected != null && isResurrected){
+                    donkeyTap.set(1)
+                    startRepeatingTasks()
+                }
+            }
         }
 
         setClownMaskTvOnClick()
@@ -88,7 +107,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startRepeatingTasks() {
-        taskToRun.run()
+        if (donkeyTap.get() < 10) taskToRun.run()
     }
 
     private fun setClownMaskTvOnClick() {
@@ -101,11 +120,16 @@ class MainActivity : AppCompatActivity() {
                 Names.DANCER -> R.string.dancing_clown
                 Names.DED -> R.string.ded_clown
                 Names.SUGAR -> R.string.dev_clown
+                Names.AMOGUS -> {
+                    val anotherActivity = Intent(this, AnotherActivity::class.java)
+                    anotherActivity.putExtra("isKilled", donkeyTap.get() >= 10)
+                    resultLauncher.launch(anotherActivity); R.string.transition
+                }
                 else -> { if (donkeyTap.get() >= 10) R.string.nothing else R.string.not_clown }
             }
 
             Log.d(tag, "namePt input: ${input.ifEmpty { "-NO INPUT FROM USER-" }}; textToSet: ${getString(textToSetId)}")
-            mainBinding.resultTv.visibility = View.VISIBLE
+
             mainBinding.resultTv.text = getString(textToSetId)
         }
     }
@@ -123,6 +147,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        mainBinding.resultTv.text = ""
         startRepeatingTasks()
         Log.d(tag, "MainActivity is resumed")
     }
